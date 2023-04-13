@@ -1,7 +1,12 @@
-import React, { useState } from "react";
-import {questionsAPI} from "./App";
+import React, { useContext, useState } from "react";
+import {QuestionsContext} from "./QuestionsContext";
+const questionsAPI = 'http://localhost:4000/questions';
+
 
 function QuestionForm() {
+
+  const { questions, setQuestions } = useContext(QuestionsContext);
+
   const [formData, setFormData] = useState({
     prompt: "",
     answer1: "",
@@ -33,7 +38,7 @@ function QuestionForm() {
       body: JSON.stringify(data)
     })
       .then(r=>r.json())
-      .then(newQuestion => console.log(newQuestion))
+      .then(newQuestion => setQuestions([...questions, newQuestion]))
   }
 
   return (

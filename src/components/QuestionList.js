@@ -1,19 +1,10 @@
-import React, {useEffect, useState} from "react";
-import {questionsAPI} from "./App";
+import React, {useEffect, useContext} from "react";
 import QuestionItem from "./QuestionItem";
+import {QuestionsContext} from "./QuestionsContext";
+
 
 function QuestionList() {
-
-  const [questions, setQuestions] = useState([]);
-
-
-  useEffect(()=>{
-    //Load question list
-    fetch(questionsAPI, {method: "GET"})
-      .then(r => r.json())
-      .then(questions => setQuestions(questions))
-  },[])
-
+  const { questions, setQuestions } = useContext(QuestionsContext);
 
   return (
     <section>

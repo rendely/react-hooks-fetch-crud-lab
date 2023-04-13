@@ -2,17 +2,20 @@ import React, { useState } from "react";
 import AdminNavBar from "./AdminNavBar";
 import QuestionForm from "./QuestionForm";
 import QuestionList from "./QuestionList";
-const questionsAPI = 'http://localhost:4000/questions';
+import {QuestionsProvider} from "./QuestionsContext";
+
 
 function App() {
   const [page, setPage] = useState("List");
 
   return (
     <main>
-      <AdminNavBar onChangePage={setPage} />
-      {page === "Form" ? <QuestionForm /> : <QuestionList />}
+      <QuestionsProvider>
+        <AdminNavBar onChangePage={setPage} />
+        {page === "Form" ? <QuestionForm /> : <QuestionList />}
+      </QuestionsProvider>
     </main>
   );
 }
 
-export {App, questionsAPI};
+export default App;

@@ -1,7 +1,15 @@
-import React from "react";
+import React, {useContext} from "react";
+import {QuestionsContext} from "./QuestionsContext";
 
 function QuestionItem({ question }) {
   const { id, prompt, answers, correctIndex } = question;
+  const { questions, setQuestions } = useContext(QuestionsContext);
+
+  function handleDelete(e){
+    e.preventDefault();
+    const id = question.id;
+    setQuestions(questions.filter(q => q.id !== id));
+  }
 
   const options = answers.map((answer, index) => (
     <option key={index} value={index}>
@@ -17,7 +25,7 @@ function QuestionItem({ question }) {
         Correct Answer:
         <select defaultValue={correctIndex}>{options}</select>
       </label>
-      <button>Delete Question</button>
+      <button onClick={handleDelete}>Delete Question</button>
     </li>
   );
 }

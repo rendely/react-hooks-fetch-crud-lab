@@ -11,8 +11,8 @@ function QuestionItem({ question }) {
     const id = question.id;
     fetch(questionsAPI + '/' + id, {method: "DELETE"})
       .then(r => r.json())
-      .then(() => console.log("deleted!"))
-    setQuestions(questions.filter(q => q.id !== id));
+      .then(() => setQuestions(questions.filter(q => q.id !== id)))
+    
   }
 
   function handleChangeAnswer(e) {
